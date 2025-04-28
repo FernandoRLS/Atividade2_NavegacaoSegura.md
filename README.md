@@ -1,5 +1,6 @@
 # Atividade na Unidade 3 - Programação de Computadores
 
+
 ## 📄 Descrição
 Simulação em Python de navegação segura em um campo de asteroides, utilizando loops `while` para detectar proximidade de perigos, emitir alertas e garantir que a nave alcance espaço livre de forma didática e interativa.
 
@@ -21,6 +22,23 @@ Simulação em Python de navegação segura em um campo de asteroides, utilizand
 - **Ambiente de Desenvolvimento:** Google Colab
 
 ---
+
+## 🐍 Sobre Python e Comandos Utilizados
+
+Breve explicação do Python e dos principais comandos usados neste projeto:
+
+- **Python:** linguagem de programação de alto nível, interpretada e multiplataforma, ideal para automação e prototipagem rápida.
+- **`import random`**: módulo para gerar números aleatórios.
+- **`random.randint(a, b)`**: retorna um inteiro entre `a` e `b` (inclusive).
+- **`import time`**: módulo para funcionalidades de tempo.
+- **`time.sleep(segundos)`**: pausa a execução por um número de segundos.
+- **`while condição:`** laço que repete o bloco enquanto a condição for verdadeira.
+- **`break`**: interrompe o loop imediatamente.
+- **`if condição:`** executa código quando a condição for satisfeita.
+- **`input(prompt)`**: lê entrada do usuário como string.
+- **`int()`**: converte string para inteiro.
+- **`print()`**: exibe mensagens na tela.
+- **f-strings (`f"texto {var}"`)**: facilita a formatação de strings com variáveis.
 
 ## 🔧 Pré-requisitos
 - Conta Google para acessar o Google Colab
@@ -53,36 +71,64 @@ Simulação em Python de navegação segura em um campo de asteroides, utilizand
 
 ---
 
-## 💻 Código Principal
+## 💻 Código Principal com Interação do Usuário
 ```python
 import random
+import time
 
-distancia_segura = 5  # distância inicial segura
+def navegar_campo_asteroides():
+    # Solicita valores iniciais ao usuário
+    distancia_segura = int(input("Digite a distância inicial segura (inteiro positivo): "))
+    incremento = int(input("Digite o valor de incremento para afastamento (ex: 2): "))
+    
+    while True:
+        distancia_asteroide = random.randint(1, 10)
+        print(f"
+Distância do asteroide: {distancia_asteroide}")  # quebra de linha para melhor visualização
 
-distancia_asteroide = random.randint(1, 10)
+        # Verifica perigo imediato
+        if distancia_asteroide < 3:
+            print("PERIGO! Asteroide muito próximo! Encerrando simulação.")
+            break
 
-while distancia_asteroide < distancia_segura:
-    print(f"Distância do asteroide: {distancia_asteroide}")
-    if distancia_asteroide < 3:
-        print("PERIGO! Asteroide muito próximo! Encerrando simulação.")
-        break
-    if distancia_asteroide < distancia_segura / 2:
-        print("Aproximando-se de asteroide!")
-    distancia_segura += 2
-    print(f"Distância segura agora é {distancia_segura}
-")
-    distancia_asteroide = random.randint(1, 10)
-else:
-    print("Navegação concluída com segurança!")
-```
+        # Alerta de aproximação
+        if distancia_asteroide < distancia_segura / 2:
+            print("Aproximando-se de asteroide!")
+
+        # Aumenta distância segura
+        distancia_segura += incremento
+        print(f"Distância segura agora é {distancia_segura}")
+
+        # Pausa rápida para simular tempo de navegação
+        time.sleep(1)
+    
+    print("
+Navegação finalizada.")
+
+# Loop principal para reiniciar a simulação
+if __name__ == "__main__":
+    while True:
+        navegar_campo_asteroides()
+        opcao = input("
+Deseja reiniciar a simulação? (s/n): ").lower()
+        if opcao != 's':
+            print("Encerrando o programa. Até a próxima aventura!")
+            break
+```  
+
+> **Como funciona:**
+> 1. O programa pede ao usuário a **distância inicial segura** e o **incremento** para afastamento.
+> 2. Em cada iteração, gera uma distância aleatória do asteroide e aplica as lógicas de perigo e alerta.
+> 3. Ao final de cada execução, pergunta se o usuário deseja reiniciar a simulação.
 
 ---
 
 ## 🤝 Contribuição
 Contribuições são bem-vindas! Sinta-se à vontade para abrir *issues* ou enviar *pull requests*.
 
+Contribuições são bem-vindas! Sinta-se à vontade para abrir *issues* ou enviar *pull requests*.
+
 ---
 
 ## 📄 Licença
 Este projeto está licenciado sob a [MIT License](LICENSE).
-
